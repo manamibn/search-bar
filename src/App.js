@@ -2,34 +2,33 @@ import "./App.css";
 import { useEffect, useState } from "react";
 
 function App() {
-  const [users, setUsers] = useState({
+  const [drinks, setDrinks] = useState({
     query: "",
     resultList: [],
   });
-  const [userList, setUserList] = useState([]);
+  const [drinkList, setDrinkList] = useState([]);
 
-  const fetchUser = () => {
-    fetch("https://randomuser.me/api/")
+  const fetchdrinks = () => {
+    fetch("https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita")
       .then((res) => res.json())
-      .then((data) => setUserList([data.results[0]]));
+      .then((data) => setDrinkList(data.drinks));
   };
   useEffect(() => {
-    fetchUser();
+    fetchdrinks();
   }, []);
   const handleChange = (e) => {
-    console.log("users--", userList);
+    console.log("drinks--", drinkList);
     console.log("e--", e.target.value);
-    const list = userList.filter((user) => {
+    const list = drinkList.filter((drink) => {
       if (e.target.value === "") {
-        return userList;
+        return drinkList;
       } else {
-        console.log("title--", user);
-        return user.name.title
+        return drink.strDrink
           .toLowerCase()
           .includes(e.target.value.toLowerCase());
       }
     });
-    setUsers({
+    setDrinks({
       query: e.target.value,
       resultList: list,
     });
@@ -39,24 +38,31 @@ function App() {
       <form>
         <input
           type="search"
-          value={users.query}
+          value={drinks.query}
           onChange={(e) => handleChange(e)}
         />
+        <ul>
+          {drinks.query === ""
+            ? "No drinks to show"
+            : !drinks.resultList.length
+            ? "Your query did not return any results"
+            : drinks.resultList.map((dr) => {
+                return (
+                  <div style={{ padding: "10px" }}>
+                    <li key={dr.idDrink}>
+                      {dr.strDrink} - {dr.strAlcoholic} - {dr.strCategory} -
+                      {dr.strGlass}
+                    </li>
+                    <img
+                      src={dr.strDrinkThumb}
+                      alt="nothing found"
+                      style={{ height: "200px", width: "200px" }}
+                    />
+                  </div>
+                );
+              })}
+        </ul>
       </form>
-      <ul>
-        {users.query === ""
-          ? "No list to show"
-          : !users.resultList.length
-          ? "Your query did not return any results"
-          : users.resultList.map((us) => {
-              return (
-                <li key={us.name.title}>
-                  {us.name.title}. {us.name.first} {us.name.last} {"from, "}
-                  {us.location.city}, {us.location.country}{" "}
-                </li>
-              );
-            })}
-      </ul>
     </div>
   );
 }
