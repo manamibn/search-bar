@@ -13,12 +13,12 @@ function App() {
       .then((res) => res.json())
       .then((data) => setDrinkList(data.drinks));
   };
+
   useEffect(() => {
     fetchdrinks();
   }, []);
+
   const handleChange = (e) => {
-    console.log("drinks--", drinkList);
-    console.log("e--", e.target.value);
     const list = drinkList.filter((drink) => {
       if (e.target.value === "") {
         return drinkList;
@@ -33,6 +33,7 @@ function App() {
       resultList: list,
     });
   };
+
   return (
     <div className="App">
       <form>
@@ -44,9 +45,9 @@ function App() {
         />
         <ul>
           {drinks.query === ""
-            ? "No drinks to show"
+            ? "No drinks to show..."
             : !drinks.resultList.length
-            ? "Your query did not return any results"
+            ? "Your query did not match any results!"
             : drinks.resultList.map((dr) => {
                 return (
                   <div style={{ padding: "10px" }}>
