@@ -37,6 +37,7 @@ function App() {
     <div className="App">
       <form>
         <input
+          style={{ margin: "40px 0px 0px 40px" }}
           type="search"
           value={drinks.query}
           onChange={(e) => handleChange(e)}
