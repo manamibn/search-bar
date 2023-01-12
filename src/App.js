@@ -39,7 +39,7 @@ function App() {
       <div className="input-container">
         <input
           type="search"
-          placeholder="type..."
+          placeholder="search for drinks..."
           value={drinks.query}
           onChange={(e) => handleChange(e)}
         />
@@ -48,7 +48,7 @@ function App() {
         {drinks.query === ""
           ? "No drinks to show"
           : !drinks.resultList.length
-          ? "Your query did not match any results"
+          ? "Ooops... No match found!"
           : drinks.resultList.map((dr) => {
               return (
                 <div className="list">
