@@ -35,36 +35,36 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <form>
+    <div className="container">
+      <div className="input-container">
         <input
-          style={{ margin: "40px 0px 0px 40px" }}
           type="search"
+          placeholder="type..."
           value={drinks.query}
           onChange={(e) => handleChange(e)}
         />
-        <ul>
-          {drinks.query === ""
-            ? "No drinks to show..."
-            : !drinks.resultList.length
-            ? "Your query did not match any results!"
-            : drinks.resultList.map((dr) => {
-                return (
-                  <div style={{ padding: "10px" }}>
-                    <li key={dr.idDrink}>
-                      {dr.strDrink} - {dr.strAlcoholic} - {dr.strCategory} -
-                      {dr.strGlass}
-                    </li>
-                    <img
-                      src={dr.strDrinkThumb}
-                      alt="nothing found"
-                      style={{ height: "200px", width: "200px" }}
-                    />
-                  </div>
-                );
-              })}
-        </ul>
-      </form>
+      </div>
+      <ul className="list-items">
+        {drinks.query === ""
+          ? "No drinks to show"
+          : !drinks.resultList.length
+          ? "Your query did not match any results"
+          : drinks.resultList.map((dr) => {
+              return (
+                <div className="list">
+                  <li key={dr.idDrink}>
+                    {dr.strDrink} - {dr.strAlcoholic} - {dr.strCategory} -
+                    {dr.strGlass}
+                  </li>
+                  <img
+                    src={dr.strDrinkThumb}
+                    alt="nothing found"
+                    style={{ height: "200px", width: "200px" }}
+                  />
+                </div>
+              );
+            })}
+      </ul>
     </div>
   );
 }

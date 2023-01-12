@@ -1,17 +1,21 @@
-/* .App {
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.input-container {
   text-align: center;
+  padding: 2rem;
+}
+input {
+  width: 25%;
+  font-size: 1rem;
+  background: #f2f2f2;
+  padding: 12px;
+  border-radius: 5px;
 }
 
-
-.App-link {
-  color: #61dafb;
+.list-items {
+  text-align: center;
+  list-style-type: none;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-} */
